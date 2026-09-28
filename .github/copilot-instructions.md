@@ -37,10 +37,11 @@ To eliminate black-box AI risks and prove human control to enterprise clients, t
          │
          ▼
   ┌─────────────────────────────────────────────────────────────┐
-  │ 🛑 GATE 1: Requirements & Test Scenario Review (ask_question)│
-  │ Proposes drafted test.step() scenarios. Awaits approval.    │
+  │ 🛑 GATE 1: Requirements, BDD Scenarios & Manual Tests       │
+  │ Displays test.step() BDD & manual test grid. Prompts user   │
+  │ to publish manual test cases to ADO Test Plan before build. │
   └──────────────────────────────┬──────────────────────────────┘
-                                 │ Approved
+                                 │ Approved (Publishes ADO Test Case)
                                  ▼
 [Exploration Agent] (MCP) + [Automation Agent] (POM & Validate)
          │
@@ -55,16 +56,17 @@ To eliminate black-box AI risks and prove human control to enterprise clients, t
          │
          ▼
   ┌─────────────────────────────────────────────────────────────┐
-  │ 🛑 GATE 3: Release Certification & Trace Review (ask_question)│
-  │ Displays pass rate, duration, and RTM. Confirms sign-off.   │
+  │ 🛑 GATE 3: Release Certification & Trace Review             │
+  │ Displays pass rate, duration, and RTM. Confirms sign-off,   │
+  │ then updates parent ADO Issue with release metrics comment. │
   └─────────────────────────────────────────────────────────────┘
 ```
 
 > [!IMPORTANT]
 > **Mandatory Review Packet Rule**: NEVER call `ask_question` in isolation. You MUST print the complete **Review Packet** in visible chat markdown **before** triggering the tool so the reviewer has all evidence directly on screen:
-> - **Gate 1 Review Packet**: Ingested ADO Story details, Risk assessment, and the full drafted `test.step()` Gherkin scenarios.
+> - **Gate 1 Review Packet**: Ingested ADO Story details, Risk assessment, the full drafted `test.step()` Gherkin scenarios, AND the structured manual test case grid. The Gate 1 prompt MUST ask whether to publish manual test cases to Azure DevOps Test Plan before progressing to Playwright automation.
 > - **Gate 2 Review Packet**: Live DOM mapping table (Element → Playwright Semantic Locator), generated Page Object summary, and `npm run validate` 0-error proof.
-> - **Gate 3 Review Packet**: Execution duration, pass/fail status, Requirements Traceability Matrix (RTM) table, and Release Readiness Scorecard.
+> - **Gate 3 Review Packet**: Execution duration, pass/fail status, Requirements Traceability Matrix (RTM) table, and Release Readiness Scorecard. Upon user sign-off, the agent MUST immediately invoke `wit_work_item_comment_write` to post the release metrics dossier onto the parent ADO Issue.
 
 ---
 
@@ -73,20 +75,22 @@ To eliminate black-box AI risks and prove human control to enterprise clients, t
 During presentations, narrate each milestone with its persona header, present the review packet, and pause at the interactive gates:
 
 ```text
-[Requirement Analyst] Ingested Azure DevOps User Story #5: Extracted 2 Gherkin Acceptance Criteria.
-[Test Strategy Agent] Risk Level: MEDIUM (Authentication & RBAC). Target: Headed Chromium (1280x720).
-[Test Design Agent] Formatted Playwright test.step() scenarios matching @ADO-5.
---> PAUSE AT GATE 1 (Awaiting User Sign-Off via ask_question)
+[Requirement Analyst] Ingested Azure DevOps User Story #6: Extracted 2 Gherkin Acceptance Criteria.
+[Test Strategy Agent] Risk Level: HIGH (KYC Compliance & Risk Scoring). Target: Headed Chromium (1280x720).
+[Test Design Agent] Formatted Playwright test.step() scenarios and authored structured manual test cases.
+--> PAUSE AT GATE 1 (Awaiting User Sign-Off & ADO Test Plan Publication via ask_question)
+[Test Design Agent] Published Test Case #12 to Azure DevOps Test Plan linked to Story #6.
 
-[Exploration Agent] Navigating to http://localhost:3000/login via Playwright MCP... Discovered semantic locators (getByRole, getByLabel).
-[Automation Agent] Generated Page Object tests/src/pages/LoginPage.ts and spec tests/specs/auth.spec.ts.
+[Exploration Agent] Navigating to http://localhost:3000/borrowers/new via Playwright MCP... Discovered semantic locators (getByRole, getByLabel).
+[Automation Agent] Generated Page Object tests/src/pages/BorrowersPage.ts and spec tests/specs/borrowers.spec.ts.
 [Automation Agent] Quality Gate: Verified with npm run validate (0 errors, 0 warnings).
 --> PAUSE AT GATE 2 (Awaiting User Sign-Off via ask_question)
 
-[Execution Agent] Launching headed Chromium browser... All 2 test scenarios passed in 3.8s!
-[Coverage Agent] Verified Requirements Traceability Matrix: 100% of User Story #5 Acceptance Criteria covered.
+[Execution Agent] Launching headed Chromium browser... All 2 test scenarios passed in 7.2s!
+[Coverage Agent] Verified Requirements Traceability Matrix: 100% of User Story #6 Acceptance Criteria covered.
 [Release Quality Agent] Release Gate Verdict: RELEASE CERTIFIED (GO). Acceleration: ~140x faster than manual QA.
 --> PAUSE AT GATE 3 (Awaiting Final Release Sign-Off via ask_question)
+[Release Quality Agent] Updated Azure DevOps Issue #6 with complete Release Quality Metrics & Audit Comment.
 ```
 
 ---
@@ -96,7 +100,8 @@ During presentations, narrate each milestone with its persona header, present th
 ### 1. Azure DevOps MCP (`ado`)
 * Use `wit_work_item` (`action: "get"`) to fetch User Stories, Epics, and Acceptance Criteria.
 * Use `wit_query` (`action: "wiql"`) to discover sprint backlog items.
-* Use `testplan_test_case_write` (`action: "create"`) to publish structured manual test cases with step-by-step grids and link them to User Stories (`testsWorkItemId`).
+* Use `testplan_test_case_write` (`action: "create"`) at **Gate 1** to publish structured manual test cases with step-by-step grids and link them to User Stories (`testsWorkItemId`).
+* Use `wit_work_item_comment_write` (`action: "add"`) at **Gate 3** to persist the complete Release Quality Scorecard, execution duration, pass rate, RTM trace, and deployment sign-off directly onto the parent User Story / Issue.
 * Use `wit_work_item_write` (`action: "create"`) to auto-log Bugs when application defects occur.
 * Use `wit_work_item_link_write` to link Tests and Bugs to parent User Stories and Test Suites.
 
@@ -120,6 +125,8 @@ Always ground domain logic against:
 * **Target Application as Black Box**: The application under test is an external running service at `http://localhost:3000`. Never search the local filesystem for backend/frontend code or restore legacy git files.
 * **Host Network Access for Tests**: Browser test runs targeting `http://localhost:3000` connect to the host network. When invoking `run_command` for test runs (`npm run test:demo`, `npx playwright test`), ALWAYS specify `BypassSandbox: true` to prevent container isolation connection errors (`net::ERR_CONNECTION_REFUSED`).
 * **Strict State Machine**: Execute the sequential 12-agent pipeline and pause only at the 3 defined interactive governance gates.
+* **Anti-Sample & Deep Decomposition**: Never generate shallow smoke-only stubs. Decompose every table, field constraint (e.g. 10 digits), lifecycle route transition, and business calculation (e.g. risk bands) into verifiable test cases.
+* **Assertion Integrity & Zero Masking**: Positive happy path tests MUST assert the real business post-condition (route change, status badge, created record) and must NEVER mask backend errors with form-stay or error assertions. The Coverage Agent must reject any scenario that fakes coverage with weak fallback checks.
 
 ---
 

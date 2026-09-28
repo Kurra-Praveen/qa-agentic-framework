@@ -68,6 +68,7 @@ export class LoginPage extends BasePage {
     await this.enterEmail(email);
     await this.enterPassword(password);
     await this.clickSignIn();
+    await this.page.waitForURL('**/dashboard');
   }
 
   /**
