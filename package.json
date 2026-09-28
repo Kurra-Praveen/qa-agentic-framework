@@ -1,0 +1,27 @@
+{
+  "name": "loanplatform-qa-orchestrator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Master AI QA Orchestration Framework for LoanPlatform Multi-Tenant SaaS",
+  "scripts": {
+    "test": "npm --prefix tests run test",
+    "test:demo": "npm --prefix tests run test:demo",
+    "test:headed": "npm --prefix tests run test:headed",
+    "validate": "npm --prefix tests run validate",
+    "lint": "npm --prefix tests run lint",
+    "typecheck": "npm --prefix tests run typecheck",
+    "report": "npm --prefix tests run report",
+    "demo:break": "npm --prefix tests run demo:break",
+    "demo:reset": "npm --prefix tests run demo:reset"
+  },
+  "keywords": [
+    "playwright",
+    "qa-orchestration",
+    "azure-devops",
+    "autonomous-testing",
+    "self-healing",
+    "fintech"
+  ],
+  "author": "",
+  "license": "ISC"
+}

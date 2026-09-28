@@ -1,0 +1,26 @@
+{
+  "name": "loanplatform-e2e-tests",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Agentic E2E Test Automation Framework for LoanPlatform using Playwright and TypeScript",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:demo": "playwright test --headed --project=chromium",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run typecheck && npm run lint",
+    "demo:break": "node scripts/simulate-ui-drift.js",
+    "demo:reset": "node scripts/reset-ui-drift.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2",
+    "@typescript-eslint/eslint-plugin": "^8.70.1",
+    "@typescript-eslint/parser": "^8.70.1",
+    "eslint": "^10.11.0",
+    "typescript": "^5.7.2"
+  }
+}

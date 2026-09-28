@@ -1,0 +1,33 @@
+{
+  "inputs": [
+    {
+      "id": "ado_pat",
+      "type": "promptString",
+      "description": "Azure DevOps PAT (base64 email:pat)",
+      "password": true
+    }
+  ],
+  "servers": {
+    "ado": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp",
+        "agentic-qa-automation",
+        "--authentication",
+        "pat"
+      ],
+      "env": {
+        "PERSONAL_ACCESS_TOKEN": "${input:ado_pat}"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    }
+  }
+}
