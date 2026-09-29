@@ -1,0 +1,61 @@
+Total messages: 190 (Errors: 47, Warnings: 36)
+Returning 47 messages for level "error"
+
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/ACTIVE?page=0&size=5:0
+[ERROR] %c❌ [2026-09-29T06:54:57.804Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch dashboard stats color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/borrowers?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/PENDING_APPROVAL?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/DRAFT?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=5:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans?page=0&size=10&sortBy=createdAt&sortDir=desc:0
+[ERROR] %c❌ [2026-09-29T06:54:57.813Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch recent activity color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=10:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/DRAFT?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/borrowers?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/ACTIVE?page=0&size=5:0
+[ERROR] %c❌ [2026-09-29T06:54:58.831Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch dashboard stats color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=5:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/PENDING_APPROVAL?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans?page=0&size=10&sortBy=createdAt&sortDir=desc:0
+[ERROR] %c❌ [2026-09-29T06:54:58.858Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch recent activity color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=10:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans?page=0&size=10&sortBy=createdAt&sortDir=desc:0
+[ERROR] %c❌ [2026-09-29T06:55:28.886Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch recent activity color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=10:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=10:0
+[ERROR] %c❌ [2026-09-29T06:55:29.905Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch recent activity color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans?page=0&size=10&sortBy=createdAt&sortDir=desc:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/DRAFT?page=0&size=1:0
+[ERROR] %c❌ [2026-09-29T06:55:58.859Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch dashboard stats color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=5:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/borrowers?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/ACTIVE?page=0&size=5:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/PENDING_APPROVAL?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/DRAFT?page=0&size=1:0
+[ERROR] %c❌ [2026-09-29T06:55:59.882Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch dashboard stats color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/ACTIVE?page=0&size=5:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans/status/PENDING_APPROVAL?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=5:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/borrowers?page=0&size=1:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans?page=0&size=10&sortBy=createdAt&sortDir=desc:0
+[ERROR] %c❌ [2026-09-29T06:55:59.923Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch recent activity color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=10:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans?page=0&size=10&sortBy=createdAt&sortDir=desc:0
+[ERROR] %c❌ [2026-09-29T06:56:00.943Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch recent activity color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=10:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/payments?page=0&size=10:0
+[ERROR] %c❌ [2026-09-29T06:56:30.960Z] [LoanPlatform] [ERROR] [DashboardService] Failed to fetch recent activity color: #EF4444; font-weight: bold; {error: AxiosError: Request failed with status code 403
+    at settle (http://localhost:3000/node_modules/.…} @ http://localhost:3000/src/utils/logger.ts:63
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/loans?page=0&size=10&sortBy=createdAt&sortDir=desc:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/borrowers?page=0&size=20&sortBy=createdAt&sortDir=desc:0
+[ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:3000/api/v1/borrowers?page=0&size=20&sortBy=createdAt&sortDir=desc:0

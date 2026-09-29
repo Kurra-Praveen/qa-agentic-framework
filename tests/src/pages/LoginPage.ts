@@ -41,6 +41,19 @@ export class LoginPage extends BasePage {
   }
 
   /**
+   * Verify the login page is fully loaded and interactive
+   */
+  async verifyLoginPageLoaded(): Promise<void> {
+    await expect(this.brandHeading).toBeVisible();
+    await expect(this.pageHeading).toBeVisible();
+    await expect(this.emailInput).toBeVisible();
+    await expect(this.passwordInput).toBeVisible();
+    await expect(this.rememberMeCheckbox).toBeVisible();
+    await expect(this.forgotPasswordLink).toBeVisible();
+    await expect(this.signInButton).toBeVisible();
+  }
+
+  /**
    * Enter email address
    */
   async enterEmail(email: string): Promise<void> {
@@ -62,11 +75,41 @@ export class LoginPage extends BasePage {
   }
 
   /**
+   * Set the Remember me checkbox state
+   */
+  async setRememberMe(shouldRemember: boolean): Promise<void> {
+    if (shouldRemember) {
+      await this.rememberMeCheckbox.check();
+      return;
+    }
+
+    await this.rememberMeCheckbox.uncheck();
+  }
+
+  /**
+   * Open the password reset flow
+   */
+  async openForgotPassword(): Promise<void> {
+    await this.forgotPasswordLink.click();
+  }
+
+  /**
    * Perform end-to-end login flow
    */
   async login(email: string, password: string): Promise<void> {
     await this.enterEmail(email);
     await this.enterPassword(password);
+    await this.clickSignIn();
+    await this.page.waitForURL('**/dashboard');
+  }
+
+  /**
+   * Complete login with optional Remember me selection
+   */
+  async loginWithRememberMe(email: string, password: string, rememberMe: boolean): Promise<void> {
+    await this.enterEmail(email);
+    await this.enterPassword(password);
+    await this.setRememberMe(rememberMe);
     await this.clickSignIn();
     await this.page.waitForURL('**/dashboard');
   }

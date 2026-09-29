@@ -35,6 +35,33 @@ export class DashboardPage extends BasePage {
     await this.verifyUrl(/\/dashboard/);
     await expect(this.dashboardHeading).toBeVisible();
     await expect(this.navDashboardLink).toBeVisible();
+    await expect(this.navBorrowersLink).toBeVisible();
+    await expect(this.navLoansLink).toBeVisible();
+    await expect(this.navPaymentsLink).toBeVisible();
+    await expect(this.navReportsLink).toBeVisible();
+    await expect(this.navTenantsLink).toBeVisible();
+    await expect(this.navSettingsLink).toBeVisible();
+  }
+
+  /**
+   * Verify the sidebar navigation is available on all authenticated pages
+   */
+  async verifySidebarNavigationVisible(): Promise<void> {
+    await expect(this.navDashboardLink).toBeVisible();
+    await expect(this.navBorrowersLink).toBeVisible();
+    await expect(this.navLoansLink).toBeVisible();
+    await expect(this.navPaymentsLink).toBeVisible();
+    await expect(this.navReportsLink).toBeVisible();
+    await expect(this.navTenantsLink).toBeVisible();
+    await expect(this.navSettingsLink).toBeVisible();
+  }
+
+  /**
+   * Navigate back to the dashboard route
+   */
+  async goToDashboard(): Promise<void> {
+    await this.navDashboardLink.click();
+    await this.verifyUrl(/\/dashboard/);
   }
 
   /**
@@ -51,5 +78,37 @@ export class DashboardPage extends BasePage {
   async goToLoans(): Promise<void> {
     await this.navLoansLink.click();
     await this.verifyUrl(/\/loans/);
+  }
+
+  /**
+   * Navigate to the Payments page via sidebar
+   */
+  async goToPayments(): Promise<void> {
+    await this.navPaymentsLink.click();
+    await this.verifyUrl(/\/payments/);
+  }
+
+  /**
+   * Navigate to the Reports page via sidebar
+   */
+  async goToReports(): Promise<void> {
+    await this.navReportsLink.click();
+    await this.verifyUrl(/\/reports/);
+  }
+
+  /**
+   * Navigate to the Tenants page via sidebar
+   */
+  async goToTenants(): Promise<void> {
+    await this.navTenantsLink.click();
+    await this.verifyUrl(/\/tenants/);
+  }
+
+  /**
+   * Navigate to the Settings page via sidebar
+   */
+  async goToSettings(): Promise<void> {
+    await this.navSettingsLink.click();
+    await this.verifyUrl(/\/settings/);
   }
 }

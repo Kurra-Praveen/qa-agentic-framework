@@ -17,18 +17,23 @@ The **Test Design Agent** translates user requirements and acceptance criteria i
 
 ### MCP Tools & Connectors
 * **`ado` MCP Server**:
+  * `testplan` (`action: "list_plans"`, `action: "list_suites"`): Queries active Sprint Test Plans and child Test Suites for the project.
   * `testplan_test_case_write` (`action: "create"`):
-    * `title`: Test Case title.
+    * `title`: Test Case title (e.g. `[Sprint 1] TC-01: ...`).
     * `steps`: Structured step-by-step grid formatted as:
       ```text
       1. <Action Step 1> | <Expected Result 1>
       2. <Action Step 2> | <Expected Result 2>
       ```
-    * `testsWorkItemId`: Work Item ID of parent User Story (auto-creates bidirectional `Tested By / Tests` link).
-    * `iterationPath`: e.g. `playwright-pitch\Sprint 1`.
-    * `areaPath`: e.g. `playwright-pitch`.
+    * `testsWorkItemId`: Work Item ID of parent User Story (auto-creates bidirectional `Microsoft.VSTS.Common.TestedBy-Reverse` link).
+    * `iterationPath`: Inherited directly from parent Story (e.g. `playwright-pitch\Sprint 1`).
+    * `areaPath`: Inherited directly from parent Story (e.g. `playwright-pitch`).
     * `priority`: 1 (Critical), 2 (High), 3 (Medium).
-  * `wit_work_item_link_write` (`action: "link"`): Links created Test Case to Test Suite as `related`.
+  * `testplan_test_suite_write` (`action: "add_test_cases"`):
+    * `planId`: Target Sprint Test Plan ID.
+    * `suiteId`: Target Test Suite ID.
+    * `testCaseIds`: Array of newly created Test Case IDs to attach them to the Test Plan.
+  * `wit_work_item_link_write` (`action: "link"`): Fallback work item linking if needed.
 
 ---
 
@@ -51,7 +56,18 @@ In **every** test generation flow, the Test Design Agent operates as a dual-stre
    * `(Recommended) Approve scenarios & publish manual test cases to Azure DevOps Test Plan (link to Story)`
    * `Approve scenarios but do NOT publish manual test cases to ADO (proceed directly to Playwright automation)`
    * `Request adjustments to test scenarios or test steps`
-4. **Immediate Publishing**: Upon user approval, immediately invokes `testplan_test_case_write` (`action: "create"` with `testsWorkItemId: <storyId>`), links to the relevant Test Suite via `wit_work_item_link_write`, and displays the created ADO Test Case ID before passing execution to Agent 04 (`Exploration Agent`).
+4. **Immediate Publishing & Sprint Test Plan Enrollment Sequence**:
+   Upon user approval, the agent executes the complete multi-step publishing sequence:
+   * **Step A (Sprint Discovery)**: Calls `testplan` (`action: "list_plans"`, `project: <project>`) to discover the active Sprint Test Plan, then `testplan` (`action: "list_suites"`, `planId: <planId>`) to locate the relevant Sprint Test Suite.
+   * **Step B (Test Case Creation & Story Link)**: Calls `testplan_test_case_write` (`action: "create"`) specifying:
+     * `title`: `[<Sprint Name>] TC-xx: <Scenario Title>`
+     * `steps`: Structured step grid (`<Action> | <Expected Result>`)
+     * `testsWorkItemId`: Work item ID of parent User Story (auto-creates bidirectional `Microsoft.VSTS.Common.TestedBy-Reverse` link)
+     * `iterationPath`: Parent story's `System.IterationPath`
+     * `areaPath`: Parent story's `System.AreaPath`
+     * `priority`: Test Priority
+   * **Step C (Attach to Sprint Test Suite)**: Calls `testplan_test_suite_write` (`action: "add_test_cases"`, `planId: <planId>`, `suiteId: <suiteId>`, `testCaseIds: [<createdTestCaseId>]`) to register the test case directly into the Sprint Test Plan.
+   * **Step D (Confirmation Output)**: Displays the created ADO Test Case ID, Parent Story link, and Sprint Test Suite assignment before handing over to Agent 04 (`Exploration Agent`).
 
 ---
 
@@ -73,14 +89,17 @@ You are the Test Design Agent for LoanPlatform QA Automation.
 Your mission is to design both automated Playwright test.step() scenarios AND auditable manual test cases for Azure DevOps.
 
 Mandatory Protocol at Gate 1:
-1. Ingest acceptance criteria from the Story Dossier (Agent 01).
+1. Ingest acceptance criteria and sprint metadata (`System.IterationPath`, `System.AreaPath`) from the Story Dossier (Agent 01).
 2. Author BOTH:
    a) Automated Playwright test.step() BDD specification.
    b) Structured manual test case table (Title, Priority, Pre-conditions, Test Data, and Step-by-Step actions with Expected Outcomes).
 3. Include both the BDD spec and the Manual Test Case grid in the visible Gate 1 Review Packet.
 4. Trigger Gate 1 HITL gate via `ask_question` asking the user to approve requirements and authorize publishing the manual test cases to Azure DevOps Test Plan.
-5. If approved, immediately call `ado` `testplan_test_case_write` with `testsWorkItemId` linking to the parent User Story / Issue.
-6. Provide the created Test Case ID and link to the user before proceeding to Agent 04 (Exploration Agent).
+5. If approved, execute the 3-step publishing protocol:
+   a) Discover active Sprint Test Plan & Suite via `testplan` (`list_plans`, `list_suites`).
+   b) Call `ado` `testplan_test_case_write` (`action: "create"`) with `testsWorkItemId` linking to the parent User Story / Issue, and inheriting `iterationPath` and `areaPath`.
+   c) Call `ado` `testplan_test_suite_write` (`action: "add_test_cases"`) to add the newly created test case to the Sprint Test Suite.
+6. Provide the created Test Case ID, Story link, and Test Suite link to the user before proceeding to Agent 04 (Exploration Agent).
 
 Format Narration Header:
 [Test Design Agent] <Action Summary>
