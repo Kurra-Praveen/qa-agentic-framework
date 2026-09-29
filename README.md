@@ -117,4 +117,4 @@ All commands can be run directly from the repository root:
 | Role | Email | Password | Scope |
 | :--- | :--- | :--- | :--- |
 | **`SUPER_ADMIN`** | `admin@loanplatform.com` | `admin123` | Platform oversight, system audits, global settings |
-| **`LENDER_ADMIN`** | `kpraveen@gmail.com` | `admin123` | Borrower onboarding, loan origination, repayments |
+| **`LENDER_ADMIN`** | `kpraveen@gmail.com` | `kpraveen@gmail.com` | Borrower onboarding, loan origination, repayments |

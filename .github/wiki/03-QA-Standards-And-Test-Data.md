@@ -13,7 +13,7 @@
 | Role | Email | Password | Intended Test Usage |
 | :--- | :--- | :--- | :--- |
 | **`SUPER_ADMIN`** | `admin@loanplatform.com` | `admin123` | Platform oversight, tenant onboarding validation, global reports |
-| **`LENDER_ADMIN`** | `kpraveen@gmail.com` | `admin123` | Borrower creation, loan origination, payment processing |
+| **`LENDER_ADMIN`** | `kpraveen@gmail.com` | `kpraveen@gmail.com` | Borrower creation, loan origination, payment processing |
 
 ---
 

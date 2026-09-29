@@ -49,7 +49,7 @@ The LoanPlatform seed accounts are:
 | Role | Email | Password | Intended Test Coverage |
 | :--- | :--- | :--- | :--- |
 | **`SUPER_ADMIN`** | `admin@loanplatform.com` | `admin123` | System oversight, role-based authentication (`@ADO-5`) |
-| **`LENDER_ADMIN`** | `kpraveen@gmail.com` | `admin123` | Borrower onboarding (`@ADO-6`), loan origination |
+| **`LENDER_ADMIN`** | `kpraveen@gmail.com` | `kpraveen@gmail.com` | Borrower onboarding (`@ADO-6`), loan origination |
 
 ---
 
