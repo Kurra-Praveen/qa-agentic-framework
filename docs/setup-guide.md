@@ -28,17 +28,27 @@ cd ..
 
 ---
 
-## 🔐 Dual-Server MCP Configuration (`.vscode/mcp.json`)
+## 🔐 Dual-Server MCP Configuration (`.vscode/mcp.json` & Antigravity)
 
-The framework relies on two MCP servers configured in `.vscode/mcp.json`:
+The framework relies on two MCP servers configured in `.vscode/mcp.json` / `~/.gemini/antigravity/mcp_config.json`:
 
 1. **Azure DevOps MCP (`ado`)**:
    Connects to your Azure DevOps organization (`agentic-qa-automation/playwright-pitch`) using a Personal Access Token (PAT).
 2. **Playwright MCP (`playwright`)**:
    Runs on the host system to explore the live accessibility tree and DOM elements at `http://localhost:3000`.
 
-### Configure your Azure DevOps PAT:
-Set your PAT in `.vscode/mcp.json` or enter it when prompted upon opening VS Code.
+### Azure DevOps PAT Renewal & Base64 Requirement
+> [!IMPORTANT]
+> When using `--authentication pat`, `@azure-devops/mcp` injects the token into HTTP Basic Authorization headers (`Basic <token>`). Azure DevOps Basic Auth requires `:<PAT>` (base64-encoded with a leading colon).
+
+If the PAT expires or needs updating:
+1. Generate a new PAT in [Azure DevOps](https://dev.azure.com/agentic-qa-automation) with **Work Items (Read/Write)**, **Test Management (Read/Write)**, and **Project & Team (Read)**.
+2. Base64-encode the token with a leading colon:
+   ```bash
+   echo -n ":<YOUR_RAW_PAT>" | base64
+   ```
+3. Paste the base64-encoded string into `PERSONAL_ACCESS_TOKEN` in `~/.gemini/antigravity/mcp_config.json`.
+4. In VS Code, reload the window (`Ctrl + Shift + P` ➔ `Developer: Reload Window`) to refresh the MCP process environment.
 
 ---
 
