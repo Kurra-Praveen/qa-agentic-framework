@@ -75,11 +75,11 @@ To eliminate black-box AI risks and prove human control to enterprise clients, t
 During presentations, narrate each milestone with its persona header, present the review packet, and pause at the interactive gates:
 
 ```text
-[Requirement Analyst] Ingested Azure DevOps User Story #6: Extracted 2 Gherkin Acceptance Criteria.
+[Requirement Analyst] Ingested Azure DevOps User Story #6: Extracted 3 Gherkin Acceptance Criteria.
 [Test Strategy Agent] Risk Level: HIGH (KYC Compliance & Risk Scoring). Target: Headed Chromium (1280x720).
-[Test Design Agent] Formatted Playwright test.step() scenarios and authored structured manual test cases.
+[Test Design Agent] Formatted Playwright test.step() scenarios and authored structured manual test cases (P0, P1, P2).
 --> PAUSE AT GATE 1 (Awaiting User Sign-Off & ADO Test Plan Publication via ask_question)
-[Test Design Agent] Published Test Case #12 to Azure DevOps Test Plan linked to Story #6.
+[Test Design Agent] Published 3 Test Cases (TC-01, TC-02, TC-03) to Azure DevOps Test Plan linked to Story #6.
 
 [Exploration Agent] Navigating to http://localhost:3000/borrowers/new via Playwright MCP... Discovered semantic locators (getByRole, getByLabel).
 [Automation Agent] Generated Page Object tests/src/pages/BorrowersPage.ts and spec tests/specs/borrowers.spec.ts.
@@ -100,8 +100,8 @@ During presentations, narrate each milestone with its persona header, present th
 ### 1. Azure DevOps MCP (`ado`)
 * Use `wit_work_item` (`action: "get"`) to fetch User Stories, Epics, and Acceptance Criteria.
 * Use `testplan` (`action: "list_plans"`, `action: "list_suites"`) at **Gate 1** to locate the project's active Sprint Test Plan and Test Suite.
-* Use `testplan_test_case_write` (`action: "create"`) at **Gate 1** to publish structured manual test cases with step-by-step grids, inheriting the story's `iterationPath` and `areaPath`, and explicitly linking to the parent User Story (`testsWorkItemId`).
-* Use `testplan_test_suite_write` (`action: "add_test_cases"`) at **Gate 1** to attach the newly created test cases into the Sprint Test Plan's Test Suite.
+* Use `testplan_test_case_write` (`action: "create"`) at **Gate 1** in a loop across ALL drafted manual test cases (P0, P1, P2) to publish structured step-by-step grids, inheriting the story's `iterationPath` and `areaPath`, and explicitly linking to the parent User Story (`testsWorkItemId`).
+* Use `testplan_test_suite_write` (`action: "add_test_cases"`) at **Gate 1** to batch-attach ALL newly created test cases into the Sprint Test Plan's Test Suite.
 * Use `wit_work_item_comment_write` (`action: "add"`) at **Gate 3** to persist the complete Release Quality Scorecard, execution duration, pass rate, RTM trace, and deployment sign-off directly onto the parent User Story / Issue.
 * Use `wit_work_item_write` (`action: "create"`) to auto-log Bugs when application defects occur.
 * Use `wit_work_item_link_write` to link Tests and Bugs to parent User Stories and Test Suites if work-item level links are needed.

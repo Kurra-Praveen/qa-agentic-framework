@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--isolated"
+      ]
+    },
+    "ado": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp",
+        "agentic-qa-automation",
+        "--authentication",
+        "pat"
+      ],
+      "env": {
+        "PERSONAL_ACCESS_TOKEN": "OjlLMnIza1d1bmVWZ2JJOG9NUUpUNlpsR3RuNEQ0eTBsRkxWZG8wUkpMUjllRlp4Um5WNTdKUVFKOTlDS0FDQUFBQUFBQUFBQUFBQVNBWkRPM0pDcA=="
+      }
+    }
+  }
+}
